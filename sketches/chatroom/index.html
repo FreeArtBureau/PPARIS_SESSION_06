@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="socketio.js"></script>
+		<script src="processing-1.4.1.js"></script>
+		<script>
+			
+			//Set IP here :
+			var IP = '192.168.1.19';
+
+			var socket = io.connect('http://' + IP + ':8080/');
+			socket.on('message', function (data) {
+				Processing.getInstanceById('sketch').drawText( data );
+			});
+		</script>
+	</head>
+	<body>
+		<form action="#" onsubmit="socket.send( document.getElementById('message').value ); return false;">
+			<p>
+				<input type="text" id="message" name="message" placeholder="message" />
+				<input type="submit" />
+			</p>
+		</form>
+		<canvas id="sketch" data-processing-sources="sketch.pde"></canvas>
+	</body>
+</html>

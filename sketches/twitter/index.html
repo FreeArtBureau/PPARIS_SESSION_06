@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="socketio.js"></script>
+		<script src="processing-1.4.1.js"></script>
+		<script>
+			
+			//Set IP here :
+			var IP = '127.0.0.1';
+
+			var socket = io.connect('http://' + IP + ':8080/');
+			socket.on('tweet', function (data) {
+				console.log( data );
+				Processing.getInstanceById('sketch').drawTweet( data );
+			});
+
+
+		</script>
+	</head>
+	<body>
+		<canvas id="sketch" data-processing-sources="sketch.pde"></canvas>
+	</body>
+</html>
